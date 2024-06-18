@@ -10,8 +10,14 @@ if [ ! -d "./Backup" ]; then
     mkdir ./Backup
 fi
 
-echo test
-cp -R Files/* Backup/
+for file in $(ls ./Files); do
+    md5=$(md5sum ./Files/$file | cut -d ' ' -f 1)
+    mv ./Files/$file ./Files/$md5
+done
 
-#output somewhere temprarily the md5sum of every file of Files directory, take the output and create a file for each and every md5 that is output in the Backup folder
+# echo $md5
+# firstName=$(echo ${name} | cut -d ' ' -f 1)
+# cp -R Files/* Backup/
+
+#output somewhere temporarily the md5sum of every file of Files directory, take the output and create a file for each and every md5 that is output in the Backup folder
 ##can be put in a function
